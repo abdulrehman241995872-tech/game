@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+         overflow: hidden;
+       }
+        h1{
+           
+            background: url(./giphy\ \(1\).gif);
+            color: transparent;
+            background-clip: text;
+            font-size: 70px;
+            margin: 20px auto;
+            text-align: center;
+            
+        }
+          .gamebox{
+            height: 350px;
+            margin-top: 70px;
+            /* border-top: 20px dashed blue;
+            border-bottom: 20px dashed blue; */
+            position: relative;
+         
+           
+          
+        }
+        .gamebox::before  ,.gamebox::after{
+            content: '';
+            position: absolute;
+            border-top: 20px dashed orange;
+            width: 350%;
+            height: 100px;
+            top: -15px;
+            animation: move 2s infinite;
+        }
+        .gamebox::after{
+            top: 100%;
+        }
+        @keyframes move{
+            from{
+              transform: translate(-200px);
+            }
+            to{
+              transform: translate(-1200px);
+            }
+        }
+       .hero{
+        height: 60px;
+        width: 60px;
+        background-image: url(./football.jpg);
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        bottom: 0;
+        border-radius: 30%;
+       }
+       
+
+       .hardle1{
+        position: absolute;
+        height: 50%;
+        width: 20px;
+        background:linear-gradient(black,white);
+        left: 20%;
+        border-radius: 30%;
+       }
+       .hardle2{
+        position: absolute;
+        height: 50%;
+        width: 20px;
+        background:linear-gradient(black,white);
+        left: 30%;
+        bottom: 0;
+        border-radius: 30%;
+       }
+       .hardle3{
+           position: absolute;
+        height: 50%;
+        width: 20px;
+        background:linear-gradient(black,white);
+        left: 40%;
+      border-radius: 30%;
+       }
+       .hardle4{
+           position: absolute;
+        height: 50%;
+        width: 20px;
+        background:linear-gradient(black,white);
+        left: 50%;
+        bottom: 0;
+      border-radius: 30%;
+       }
+       .hardle5{
+           position: absolute;
+        height: 50%;
+        width: 20px;
+        background:linear-gradient(black,white);
+        left: 60%;
+        border-radius: 30%;
+       }
+       .hardle6{
+           position: absolute;
+        height: 50%;
+        width: 20px;
+        background:linear-gradient(black,white);
+        left: 72%;
+        bottom: 0;
+        border-radius: 30%;
+       }
+       .hardle7{
+         position: absolute;
+        height: 50%;
+        width: 20px;
+        background:linear-gradient(black,white);
+        left: 82%;
+        border-radius: 30%;
+       }
+       .hardle8{
+          position: absolute;
+        height: 50%;
+        width: 20px;
+        background:linear-gradient(black,white);
+        left: 92%;
+        bottom: 0;
+        border-radius: 30%;
+       }
+       .gameover{
+         height: 100vh;
+         width: 100%;
+         position: absolute;
+         text-align: center;
+         line-height: 100vh;
+         background: transparent;
+         display: none;
+         top: 0;
+         z-index: 100;
+
+       }
+
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>FOOTBALL GAME</h1>
+        <div class="gamebox">
+          <div class="hero" id="hero"></div>
+
+         <div class="hardle1" id="hardle1"></div>  
+         <div class="hardle2" id="hardle2"></div>
+         <div class="hardle3" id="hardle3"></div>
+        <div class="hardle4" id="hardle4"></div>
+         <div class="hardle5" id="hardle5"></div>
+         <div class="hardle6" id="hardle6"></div> 
+        <div class="hardle7" id="hardle7"></div>
+         <div class="hardle8" id="hardle8"></div>
+
+        </div>
+     
+    </div>
+       <div class="gameover" id="gameover">
+            <h2>GAME OVER</h2>
+           
+       </div>
+    <script>
+
+        var hero =document.getElementById('hero')
+        var y=0
+        var x=0
+
+
+        var hardle1=document.getElementById('hardle1')
+        var hardle2=document.getElementById('hardle2')
+        var hardle3=document.getElementById('hardle3')
+        var hardle4=document.getElementById('hardle4')
+        var hardle5=document.getElementById('hardle5')
+         var hardle6=document.getElementById('hardle6')
+         var hardle7=document.getElementById('hardle7')
+         var hardle8=document.getElementById('hardle8')
+
+         var gameover=document.getElementById('gameover')
+
+        document.addEventListener('keydown',function(e){
+  
+
+            if(e.key=='ArrowUp'){
+                y+=10
+             if(y > 90){
+                y=0
+                // alert('GAME OVER')
+             }
+             hero.style.bottom= y +'%'
+            }
+            if(e.key=='ArrowDown'){
+                y-=10
+                if(y < 0){
+                   y=1
+            //  alert('GAME OVER')
+                }
+             hero.style.bottom=y +'%'
+
+            }
+            if(e.key=='ArrowLeft'){
+                x-=3
+            hero.style.left=x+'%'    
+            }
+             if(e.key=='ArrowRight'){
+                x+=3
+            hero.style.left=x+'%'    
+            }
+            if(hero.getBoundingClientRect().right > hardle1.getBoundingClientRect().left   &&
+               hero.getBoundingClientRect().top < hardle1.getBoundingClientRect().bottom  &&
+               hero.getBoundingClientRect().left < hardle1.getBoundingClientRect().right )
+               { 
+                // alert('GAME OVER')
+               new Audio ('gameover.mp3')  .play ()
+                gameover.style.display='block'
+            
+        
+               }
+
+            if(hero.getBoundingClientRect().right > hardle2.getBoundingClientRect().left   &&
+               hero.getBoundingClientRect().bottom > hardle2.getBoundingClientRect().top  &&
+               hero.getBoundingClientRect().left < hardle2.getBoundingClientRect().right )
+               {
+                //  alert('GAME OVER')
+                 new Audio ('gameover.mp3') .play()
+                   gameover.style.display='block'
+                
+               }  
+             
+            if(hero.getBoundingClientRect().right > hardle3.getBoundingClientRect().left   &&
+               hero.getBoundingClientRect().top< hardle3.getBoundingClientRect().bottom  &&
+               hero.getBoundingClientRect().left < hardle3.getBoundingClientRect().right )
+               { 
+                  // alert('GAME OVER')
+                new Audio ('gameover.mp3') .play()
+                    gameover.style.display='block'
+
+               }
+
+             if(hero.getBoundingClientRect().right > hardle4.getBoundingClientRect().left  &&
+               hero.getBoundingClientRect().bottom > hardle4.getBoundingClientRect().top &&
+               hero.getBoundingClientRect().left < hardle4.getBoundingClientRect().right )
+               { 
+                // alert('GAME OVER')
+              new Audio ('gameover.mp3') .play()
+                  gameover.style.display='block'
+                   } 
+
+             if(hero.getBoundingClientRect().right > hardle5.getBoundingClientRect().left   &&
+               hero.getBoundingClientRect().top< hardle5.getBoundingClientRect().bottom  &&
+               hero.getBoundingClientRect().left < hardle5.getBoundingClientRect().right )
+               { 
+                // alert('GAME OVER')
+                new Audio ('gameover.mp3') .play()
+                    gameover.style.display='block'
+                  } 
+               
+            if(hero.getBoundingClientRect().right > hardle6.getBoundingClientRect().left  &&
+               hero.getBoundingClientRect().bottom > hardle6.getBoundingClientRect().top &&
+               hero.getBoundingClientRect().left < hardle6.getBoundingClientRect().right )
+               { 
+                // alert('GAME OVER')
+                new Audio ('gameover.mp3') .play()
+                    gameover.style.display='block'
+                  }   
+     
+             if(hero.getBoundingClientRect().right > hardle7.getBoundingClientRect().left   &&
+               hero.getBoundingClientRect().top < hardle7.getBoundingClientRect().bottom  &&
+               hero.getBoundingClientRect().left < hardle7.getBoundingClientRect().right )
+               { 
+                // alert('GAME OVER')
+                new Audio ('gameover.mp3') .play()
+                    gameover.style.display='block'
+                  }   
+              
+             if(hero.getBoundingClientRect().right > hardle8.getBoundingClientRect().left  &&
+               hero.getBoundingClientRect().bottom > hardle8.getBoundingClientRect().top &&
+               hero.getBoundingClientRect().left < hardle8.getBoundingClientRect().right )
+               { 
+                // alert('GAME OVER')
+                new Audio ('gameover.mp3') .play()
+                    gameover.style.display='block'
+                 } 
+       
+       
+       
+             })
+    var BallMoveFunction =   setInterval( function(){
+             y--
+              if(y < 0){ 
+                  y=1  }
+           hero.style.bottom=y+'%'  
+        },1000)
+        
+    </script>
+</body>
+</html>
